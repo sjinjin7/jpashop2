@@ -17,14 +17,16 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")//mapping을 무엇으로 할 것인가 // 외래키 이름이 member_id라고 보면 됨
     private Member member;
 
-    @OneToMany(mappedBy = "order")
+    // JPQL select o From order o; -> SQL select * from order 100 + 1
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    @OneToOne   // 일대일 관계일 경우 액세스가 많은 곳에 연관관계주인을 줌
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)   // 일대일 관계일 경우 액세스가 많은 곳에 연관관계주인을 줌
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
@@ -35,5 +37,20 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status; // 주문상태 [ORDER, CANCEL]
 
+    //==연관관계 메서드==//
+    public void setMember(Member member){
+        this.member = member;
+        member.getOrders().add(this);
+    }
+
+    public void addOrderItem(OrderItem orderItem){
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
+
+    public void setDelivery(Delivery delivery){
+        this.delivery = delivery;
+        delivery.setOrder(this);
+    }
 
 }
