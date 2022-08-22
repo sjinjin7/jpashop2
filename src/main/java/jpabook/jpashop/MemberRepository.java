@@ -7,7 +7,7 @@ import javax.persistence.PersistenceContext;
 
 @Repository
 public class MemberRepository {
-
+/*
     @PersistenceContext
     private EntityManager em;
 
@@ -20,5 +20,5 @@ public class MemberRepository {
     public Member find(Long id){
         return em.find(Member.class, id);
     }
-
+*/
 }
