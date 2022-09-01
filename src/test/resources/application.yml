@@ -1,0 +1,17 @@
+spring:
+#  datasource:
+#    url: jdbc:h2:mem:test
+#    username: sa
+#    password:
+#    driver-class-name: org.h2.Driver
+#  jpa:
+#    hibernate:
+#      ddl-auto: create
+#    properties:
+#      hibernate:
+  #     show_sql: true
+#        format_sql: true
+  #          해당 설정들은 스프링 부트 메뉴얼에서 참조하면됨 2:00
+logging.level:
+  org.hibernate.SQL: debug   #show_sql은 System.out.print로 찍는거고 해당 설정은 log로 찍는 것 / log로 찍는 것을 권장
+# org.hibernate.type: trace #파라미터 보는 설정
