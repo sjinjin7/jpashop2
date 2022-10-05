@@ -87,7 +87,7 @@ public class OrderServiceTest {
         fail("재고 수량 부족 예외가 발생해야 한다.");
     }
     
-    @Test(expected=NotEnoughStockException.class)
+    @Test//(expected=NotEnoughStockException.class)
     public void 주문취소() throws Exception{
         //given
         Member member = createMember();
